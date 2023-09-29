@@ -1,3 +1,5 @@
+package homework03;
+
 public class Programa1 {
   public static void main(String[] args) {
     int[] frecuencias = new int[4];
