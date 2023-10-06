@@ -24,4 +24,7 @@ public class SoldadoReino {
   public int getNivelVida() {
     return nivelVida;
   }
+  public String toString() {
+    return name + " nivel: " + nivelVida;
+  }
 }
