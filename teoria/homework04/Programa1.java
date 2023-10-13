@@ -1,3 +1,5 @@
+package teoria.homework04;
+
 public class Programa1{
   public static int linealSearch(int n, int[] arr) {
     for(int i = 0; i < arr.length; i += 1) {
