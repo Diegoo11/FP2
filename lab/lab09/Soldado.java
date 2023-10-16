@@ -3,6 +3,8 @@ package lab.lab09;
 public class Soldado {
   private String nombre;
   private int fila;
+  private int nivelAtaque;
+  private int nivelDefensa;
   private int columna;
   private int nivelVida;
   private int vidaActual;
@@ -15,20 +17,20 @@ public class Soldado {
     team = t;
     velocidad = 0;
     vive = true;
-    actitud = "neutral";
+    actitud = "ataque";
   }
   public Soldado(int v, String t) {
     team = t;
     velocidad = v;
     vive = true;
-    actitud = "neutral";
+    actitud = "ataque";
   }
   public Soldado(int v, int nV, String t) {
     team = t;
     vive = true;
     velocidad = v;
     nivelVida = nV;
-    actitud = "neutral";
+    actitud = "ataque";
   }
 
   public void atacar() {
@@ -80,6 +82,14 @@ public class Soldado {
   public int getColumna() { return columna; }
 
   public int getNivelVida() { return nivelVida; }
+
+  public int getNivelAtaque() { return nivelAtaque; }
+
+  public int getNivelDefensa() { return nivelDefensa; }
+
+  public void setNivelAtaque(int n) { nivelAtaque = n; }
+
+  public void setNivelDefensa(int n) { nivelDefensa = n; }
 
   public String toString() {
     return "Nombre: " + nombre +
