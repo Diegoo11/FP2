@@ -1,3 +1,5 @@
+package lab.lab04;
+
 import java.util.*;
 
 public class DemoBatalla {
