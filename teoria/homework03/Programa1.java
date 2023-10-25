@@ -1,4 +1,4 @@
-package homework03;
+package teoria.homework03;
 
 public class Programa1 {
   public static void main(String[] args) {

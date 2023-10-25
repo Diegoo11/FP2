@@ -1,3 +1,4 @@
+package teoria.homework03;
 import java.util.*;
 
 class Programa3 {
