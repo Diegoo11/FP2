@@ -1,4 +1,4 @@
-package lab.lab12;
+package lab.lab13;
 
 public class Soldado {
   private String nombre;
@@ -13,25 +13,38 @@ public class Soldado {
   private boolean vive;
   private String team;
 
+  public final static int MAX = 0;
+  private static int numSoldados = 0;
+  private static int numTeam1 = 0;
+  private static int numTeam2 = 0;
+
   public Soldado(String t) {
     team = t;
+    if(t.equals("*")) numTeam1 += 1;
+    else numTeam2 += 1;
     velocidad = 0;
     vive = true;
     actitud = "ataque";
-
+    numSoldados += 1;
   }
   public Soldado(int v, String t) {
     team = t;
+    if(t.equals("*")) numTeam1 += 1;
+    else numTeam2 += 1;
     velocidad = v;
     vive = true;
     actitud = "ataque";
+    numSoldados += 1;
   }
   public Soldado(int v, int nV, String t) {
     team = t;
+    if(t.equals("*")) numTeam1 += 1;
+    else numTeam2 += 1;
     vive = true;
     velocidad = v;
     nivelVida = nV;
     actitud = "ataque";
+    numSoldados += 1;
   }
 
   public void atacar() {
@@ -54,6 +67,9 @@ public class Soldado {
     if(vidaActual == 0) morir();
   }
   public void morir() { 
+    if(team.equals("*")) numTeam1 -= 1;
+    else numTeam2 -= 1;
+    numSoldados -= 1;
     vive = false;
   }
 
@@ -111,5 +127,15 @@ public class Soldado {
     newSoldado.setNivelDefensa(this.nivelDefensa + s.nivelDefensa);
     newSoldado.setNivelVida(this.nivelVida + s.nivelVida);
     return newSoldado;
+  }
+
+  public static int getNumSoldados() {
+    return numSoldados;
+  }
+  public static int getNumTeam1() {
+    return numTeam1;
+  }
+  public static int getNumTeam2() {
+    return numTeam2;
   }
 }

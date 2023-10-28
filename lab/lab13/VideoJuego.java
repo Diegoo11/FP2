@@ -1,4 +1,4 @@
-package lab.lab12;
+package lab.lab13;
 import java.util.*;
 
 public class VideoJuego {
@@ -25,6 +25,15 @@ public class VideoJuego {
     System.out.println("___________________________________");
     System.out.println("RANKING DE PUNTOS EJERCITO2 POR SELECT SORT");
     printRankingPointsSelect(table, ejercito2);
+    System.out.println("\n___________________________________");
+    System.out.println("NUMERO DE SOLDADOS DEL TEAM 1");
+    System.out.println(Soldado.getNumTeam1());
+    System.out.println("___________________________________");
+    System.out.println("NUMERO DE SOLDADOS DEL TEAM 1");
+    System.out.println(Soldado.getNumTeam1());
+    System.out.println("___________________________________");
+    System.out.println("NUMERO DE SOLDADOS TOTALES");
+    System.out.println(Soldado.getNumSoldados());
 
     System.out.println("###################################");
     int turno = 1;
@@ -34,7 +43,9 @@ public class VideoJuego {
 
       turno = turno == 1 ? 2 : 1;
 
-      String winner = getWinner(ejercito1, ejercito2);
+      String winner = null;
+      if(Soldado.getNumTeam1() == 0) winner = "*";
+      if(Soldado.getNumTeam2() == 0) winner = "#";
       
       if(winner != null) {
         System.out.println("###########################");
@@ -74,7 +85,7 @@ public class VideoJuego {
       System.out.println("9. Sumar niveles");
       System.out.println("10. Jugar");
       System.out.println("11. Volver");
-
+      
       int input = sc.nextInt();
       if(input == 1) crearSoldado(table, currentE, team);
       if(input == 2) eliminarSoldado(table, currentE, team);
@@ -86,32 +97,14 @@ public class VideoJuego {
       if(input == 8) verEjercito(table, currentE, team);
       if(input == 9) sumarNiveles(table, currentE, team);
       if(input == 10) break;
-      if(input == 11) main(null);
-    }
-
-    System.out.println("###################################");
-    int turno = 1;
-    while (true) {
-      printTable(table);
-      mover(table, ejercito1, ejercito2, turno);
-
-      turno = turno == 1 ? 2 : 1;
-
-      String winner = getWinner(ejercito1, ejercito2);
-
-      if(winner != null) {
-        System.out.println("###########################");
-        System.out.println("GANA EL EQUIPO " + winner);
-        System.out.println("###########################");
-        break;
-      }
+      if(input == 11) main(null);;
     }
   }
   public static void crearSoldado(Soldado[][] t, ArrayList<Soldado> e, String team) {
     Scanner sc = new Scanner(System.in);
     Soldado s = new Soldado(team);
 
-    if(e.size() >= 10) {
+    if(e.size() >= Soldado.MAX) {
       System.out.println("El ejercito tiene el maximo de soladados: ");
       return;
     }
@@ -156,6 +149,11 @@ public class VideoJuego {
   }
   public static void clonarSoldado(Soldado[][] t, ArrayList<Soldado> e, String team) {
     Scanner sc = new Scanner(System.in);
+
+    if(e.size() >= Soldado.MAX) {
+      System.out.println("El ejercito tiene el maximo de soladados: ");
+      return;
+    }
 
     System.out.print("Ingresa la columna: ");
     int col = sc.next().toUpperCase().charAt(0) - 65;
@@ -263,7 +261,7 @@ public class VideoJuego {
   }
   public static void sumarNiveles(Soldado[][] t, ArrayList<Soldado> e, String team) {
     Soldado s = e.get(0);
-    for(Soldado soldado : e) s = soldado.sumar(s);
+    for(Soldado soldado : e) soldado.sumar(s);
 
     System.out.println(s);
   }
