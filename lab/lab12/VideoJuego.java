@@ -152,7 +152,7 @@ public class VideoJuego {
       }
     }
 
-    t[col][fila] = null;
+    t[fila][col] = null;
   }
   public static void clonarSoldado(Soldado[][] t, ArrayList<Soldado> e, String team) {
     Scanner sc = new Scanner(System.in);
@@ -162,7 +162,7 @@ public class VideoJuego {
     System.out.print("Ingresa la fila: ");
     int fila = sc.nextInt() - 1;
 
-    Soldado soldadoOriginal = t[col][fila];
+    Soldado soldadoOriginal = t[fila][col];
 
     Soldado soldadoNuevo = new Soldado(soldadoOriginal.getTeam());
     soldadoNuevo.setNivelAtaque(soldadoOriginal.getNivelAtaque());
@@ -176,7 +176,7 @@ public class VideoJuego {
     int newFila = sc.nextInt() - 1;
 
     e.add(soldadoNuevo);
-    t[newCol][newFila] = soldadoNuevo;
+    t[newFila][newCol] = soldadoNuevo;
   }
   public static void modificarSoldado(Soldado[][] t, ArrayList<Soldado> e, String team) {
     Scanner sc = new Scanner(System.in);
@@ -186,7 +186,7 @@ public class VideoJuego {
     System.out.print("Ingresa la fila: ");
     int fila = sc.nextInt() - 1;
 
-    Soldado s = t[col][fila];
+    Soldado s = t[fila][col];
     System.out.println("Ingresa nivel de vida nuevo: ");
     s.setNivelVida(sc.nextInt());
     System.out.println("Ingresa nivel de ataque nuevo: ");
@@ -198,8 +198,8 @@ public class VideoJuego {
     System.out.println("Ingresa la fila nueva: ");
     s.setFila(sc.nextInt() - 1);
 
-    t[s.getColumna()][s.getFila()] = s;
-    t[col][fila] = null;
+    t[s.getFila()][s.getColumna()] = s;
+    t[fila][col] = null;
   }
   public static void compararSoldado(Soldado[][] t, ArrayList<Soldado> e, String team) {
     Scanner sc = new Scanner(System.in);
