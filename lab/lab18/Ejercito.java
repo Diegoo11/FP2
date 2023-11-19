@@ -2,7 +2,6 @@ package lab.lab18;
 import java.util.*;
 
 public class Ejercito {
-  private ArrayList<Soldado> misSoldados = new ArrayList<Soldado>(); // *
   private ArrayList<Espadachin> misEspadachines = new ArrayList<Espadachin>();
   private ArrayList<Caballero> misCaballero = new ArrayList<Caballero>();
   private ArrayList<Arquero> misArqueros = new ArrayList<Arquero>();
@@ -38,42 +37,44 @@ public class Ejercito {
   }
 
   public Ejercito(String equipo, String reino) {
-    int nSoldados1 = random(10) + 1;
-    for(int i = 0; i < nSoldados1; i += 1) addSoldados(equipo, i);
+    addSoldados(equipo);
     team = equipo;
     this.reino = reino;
   }
 
   public Ejercito(String equipo, String reino, int nums) {
-    for(int i = 0; i < nums; i += 1) addSoldados(equipo, i);
+    for(int i = 0; i < nums; i += 1) addSoldados(equipo);
     team = equipo;
     this.reino = reino;
   }
 
-  public void addSoldados(String equipo, int i) {
-    int[] soldados = new int[10];
-    for(int j = 0; j < 10; j += 1) soldados[j] = random(3);
-
-    for(int j = 0; j < 10; j += 1) {
+  public void addSoldados(String equipo) {
+    int numSoldados = random(9) + 1;
+    int[] soldados = new int[numSoldados];
+    for(int j = 0; j < soldados.length; j += 1) {
+      soldados[j] = random(3);
+    }
+    int numEspadachines = 0;
+    int numCaballeros = 0;
+    int numArqueros = 0;
+    for(int j = 0; j < soldados.length; j += 1) {
       int points = random(5) + 1;
-      int numEspadachines = 0;
-      int numCaballeros = 0;
-      int numArqueros = 0;
       String name;
+      System.out.println(equipo);
       if(soldados[j] == 0) {
         name = "EspadachinX" + numEspadachines;
-        Espadachin espadachin = new Espadachin(points, name, random(3));
+        Espadachin espadachin = new Espadachin(points, equipo, random(3));
         espadachin.setNombre(name);
         misEspadachines.add(espadachin);
         numEspadachines += 1;
       } else if (soldados[j] == 1) {
         name = "CaballeroX" + numCaballeros;
-        Caballero caballero = new Caballero(points, name);
+        Caballero caballero = new Caballero(points, equipo);
         caballero.setNombre(name);
         misCaballero.add(caballero);
       } else {
         name = "ArqueroX" + numArqueros;
-        Arquero arquero = new Arquero(points, name);
+        Arquero arquero = new Arquero(points, equipo);
         arquero.setNombre(name);
         misArqueros.add(arquero);
       }
@@ -85,7 +86,16 @@ public class Ejercito {
 
   public String toString() {
     String str = "Los soldados del ejercito de "+ reino +" son: \n";
-    for(Soldado s : misSoldados) {
+    str += "Los arqueros: \n";
+    for(Arquero s : misArqueros) {
+      str += s + "\n";
+    }
+    str += "Los espadachines: \n";
+    for(Espadachin s : misEspadachines) {
+      str += s + "\n";
+    }
+    str += "Los caballeros: \n";
+    for(Caballero s : misCaballero) {
       str += s + "\n";
     }
     return str;
