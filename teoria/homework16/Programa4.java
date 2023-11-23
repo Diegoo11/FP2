@@ -9,8 +9,19 @@ public class Programa4 {
     employees.add(new Salaried("Simon", 48000));
     employees.add(new Hourly("Donovan", 20));
 
-    for(int i = 0; i < 31; i += 1) {
-      
+    for(int i = 1; i <= 30; i += 1) {
+      for(Employee e : employees) {
+        if(e instanceof Hourly) {
+          ((Hourly) e).addHours(8);
+        }
+        if((i-4)%7 == 0 && e instanceof Hourly) {
+          System.out.println(i + " " + e);
+          
+        }
+        if(i%15 == 0 && e instanceof Salaried) {
+          System.out.println(i + " " + e);
+        }
+      }
     }
   }
 }

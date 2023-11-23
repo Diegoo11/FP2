@@ -10,7 +10,9 @@ public class Hourly extends Employee{
   }
 
   public double getPay() {
-    return hourlyRate * hours;
+    double pay = hourlyRate * hours;
+    hours = 0;
+    return pay;
   }
 
   public void addHours(double h) {
