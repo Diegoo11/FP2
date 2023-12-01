@@ -25,6 +25,7 @@ public class Soldado {
     actitud = "ataque";
     numSoldados += 1;
   }
+
   public Soldado(int nV, String t) {
     team = t;
     if(t.equals("*")) numTeam1 += 1;
@@ -38,6 +39,7 @@ public class Soldado {
   public void atacar() {
     actitud = "ofensiva";
   }
+
   public void defender() {
     actitud = "defensiva";
   }
@@ -46,6 +48,7 @@ public class Soldado {
     vidaActual -= 1;
     if(vidaActual == 0) morir();
   }
+
   public void morir() { 
     if(team.equals("*")) numTeam1 -= 1;
     else numTeam2 -= 1;
