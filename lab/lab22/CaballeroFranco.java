@@ -2,8 +2,13 @@ package lab.lab22;
 
 public class CaballeroFranco extends Caballero {
   private int nivelEvolucion = 1;
+  private String nombre = "Caballero Franco";
+
+  public String getNombre() {return nombre;}
+
   public CaballeroFranco(String team) {
     super(team);
+    setNivelVida(15);
   }
 
   public void lanzarLanza() {

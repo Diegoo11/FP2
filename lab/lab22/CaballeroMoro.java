@@ -2,9 +2,13 @@ package lab.lab22;
 
 public class CaballeroMoro extends Caballero {
   private int nivelEvolucion = 1;
+  private String nombre = "Caballero Moro";
+
+  public String getNombre() {return nombre;}
 
   public CaballeroMoro(String team) {
     super(team);
+    setNivelVida(13);
   }
 
   public void lanzarFlechas() {

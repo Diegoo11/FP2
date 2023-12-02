@@ -143,6 +143,12 @@ public class VideoJuego {
         System.out.println("Arqueros: " + s.getMisArqueros().size());
         System.out.println("Caballeros: " + s.getMisCaballeros().size());
         System.out.println("Lanceros: " + s.getMisLanceros().size());
+        System.out.println(
+          s.getMisSoldadosEspeciales().get(0).getNombre()
+          + ": "
+          + s.getMisSoldadosEspeciales().size()
+        );
+
         System.out.println("Ejercito 2: " + sF.getReino());
         System.out.println("Cantidad de soldados: " + (sF.getMisArqueros().size()
           + sF.getMisCaballeros().size() + sF.getMisEspadachines().size() + sF.getMisLanceros().size()));
@@ -150,6 +156,11 @@ public class VideoJuego {
         System.out.println("Arqueros: " + sF.getMisArqueros().size());
         System.out.println("Caballeros: " + sF.getMisCaballeros().size());
         System.out.println("Lanceros: " + sF.getMisLanceros().size());
+        System.out.println(
+          sF.getMisSoldadosEspeciales().get(0).getNombre()
+          + ": "
+          + sF.getMisSoldadosEspeciales().size()
+        );
         atacarEjercito(s, sF);
         return;
       }
@@ -158,121 +169,6 @@ public class VideoJuego {
   
   public static void atacarEjercito(Ejercito e1, Ejercito e2) {
     SoldadoComun[][] mapa = new SoldadoComun[10][10];
-    int sum1 = 0;
-    int sum2 = 0;
-
-    for(Arquero s : e1.getMisArqueros()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum1 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
-    for(Caballero s : e1.getMisCaballeros()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum1 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
-    for(Espadachin s : e1.getMisEspadachines()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum1 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
-    for(Lancero s : e1.getMisLanceros()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum1 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
-    for(Arquero s : e2.getMisArqueros()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum2 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
-    for(Caballero s : e2.getMisCaballeros()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum2 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
-    for(Espadachin s : e2.getMisEspadachines()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum2 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
-    for(Lancero s : e2.getMisLanceros()) {
-      while(true) {
-        int x = random(10);
-        int y = random(10);
-        s.setColumna(x);
-        s.setFila(y);
-        sum1 += s.getNivelVida();
-  
-        if(mapa[x][y] == null) {
-          mapa[x][y] = s;
-          break;
-        }
-      }
-    }
     
     int turno = 1;
     while (true) {
@@ -284,7 +180,11 @@ public class VideoJuego {
           SoldadoComun soldado = mapa[i][j];
           if(soldado == null) System.out.print("       |");
           else {
-            System.out.print(" " + soldado.getTeam() + "/" + soldado.getNombre().charAt(0) + "/" + soldado.getNivelVida() +  " |");
+            System.out.print(
+              " " + soldado.getTeam()
+              + "/" + soldado.getNombre().charAt(0)
+              + "/" + soldado.getNivelVida() +  " |"
+            );
           }
         }
         System.out.println();
@@ -292,10 +192,6 @@ public class VideoJuego {
       }
       moverSoldados(mapa, e1, e2, turno);
       turno = turno == 1 ? 2 : 1;
-
-      sum1 = 0;
-      sum2 = 0;
-
     }
   }
   
@@ -395,6 +291,33 @@ public class VideoJuego {
 
     sum1 += bonus1;
     sum2 += bonus2;
+
+    if (s1 instanceof Arquero && s2 instanceof Caballero) s2.setNivelVida(s2.getNivelVida() + 1);
+    if (s2 instanceof Arquero && s1 instanceof Caballero) s1.setNivelVida(s1.getNivelVida() + 1);
+
+    if (s1 instanceof Lancero && s2 instanceof Caballero) s1.setNivelVida(s1.getNivelVida() + 1);
+    if (s2 instanceof Lancero && s1 instanceof Caballero) s2.setNivelVida(s2.getNivelVida() + 1);
+
+    if (s1 instanceof Arquero && s2 instanceof Lancero) s1.setNivelVida(s1.getNivelVida() + 1);
+    if (s2 instanceof Arquero && s1 instanceof Lancero) s2.setNivelVida(s2.getNivelVida() + 1);
+
+    if (s1 instanceof Caballero && s2 instanceof Espadachin) s1.setNivelVida(s1.getNivelVida() + 1);
+    if (s2 instanceof Caballero && s1 instanceof Espadachin) s2.setNivelVida(s2.getNivelVida() + 1);
+
+    if (s1 instanceof Espadachin && s2 instanceof Lancero) s1.setNivelVida(s1.getNivelVida() + 1);
+    if (s2 instanceof Espadachin && s1 instanceof Lancero) s2.setNivelVida(s2.getNivelVida() + 1);
+
+    if (s1 instanceof Espadachin && s2 instanceof EspadachinConquistador) s2.setNivelVida(s2.getNivelVida() + 1);
+    if (s2 instanceof Espadachin && s1 instanceof EspadachinConquistador) s1.setNivelVida(s1.getNivelVida() + 1);
+
+    if (s1 instanceof Espadachin && s2 instanceof EspadachinReal) s2.setNivelVida(s2.getNivelVida() + 1);
+    if (s2 instanceof Espadachin && s1 instanceof EspadachinReal) s1.setNivelVida(s1.getNivelVida() + 1);
+
+    if (s1 instanceof Espadachin && s2 instanceof EspadachinTeutonico) s2.setNivelVida(s2.getNivelVida() + 1);
+    if (s2 instanceof Espadachin && s1 instanceof EspadachinTeutonico) s1.setNivelVida(s1.getNivelVida() + 1);
+
+    if (s1 instanceof Caballero && s2 instanceof CaballeroFranco) s2.setNivelVida(s2.getNivelVida() + 1);
+    if (s2 instanceof Caballero && s1 instanceof CaballeroFranco) s1.setNivelVida(s1.getNivelVida() + 1);
 
     System.out.println("Tu ejercito tiene " + (int)((100.0/(sum1 + sum2))*sum1)
     + "% de posibilidades de vencer, y el enemigo " + (int)((100.0/(sum1 + sum2))*sum2)

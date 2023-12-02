@@ -6,6 +6,7 @@ public class Ejercito {
   private ArrayList<Caballero> misCaballero = new ArrayList<Caballero>();
   private ArrayList<Arquero> misArqueros = new ArrayList<Arquero>();
   private ArrayList<Lancero> misLanceros = new ArrayList<Lancero>();
+  private ArrayList<SoldadoComun> misSoldadosEspeciales = new ArrayList<SoldadoComun>();
 
   String team;
 
@@ -32,6 +33,7 @@ public class Ejercito {
   public ArrayList<Caballero> getMisCaballeros() { return misCaballero; }
   public ArrayList<Espadachin> getMisEspadachines() { return misEspadachines; }
   public ArrayList<Lancero> getMisLanceros() { return misLanceros; }
+  public ArrayList<SoldadoComun> getMisSoldadosEspeciales() { return misSoldadosEspeciales; }
 
 
   public Ejercito(String equipo) {
@@ -51,7 +53,25 @@ public class Ejercito {
   }
 
   public void addSoldados(String equipo) {
-    int numSoldados = random(9) + 1;
+    int numSoldados = random(7) + 1;
+    int numSoldadosEspeciales = random(2);
+    for(int i = 0; i < numSoldadosEspeciales; i += 1) {
+      if(reino.equals("Inglaterra")) {
+        misSoldadosEspeciales.add(new EspadachinReal(equipo, random(5)));
+      }
+      if(reino.equals("Francia")) {
+        misSoldadosEspeciales.add(new CaballeroFranco(equipo));
+      }
+      if(reino.equals("Sacro")) {
+        misSoldadosEspeciales.add(new EspadachinTeutonico(equipo, random(5)));
+      }
+      if(reino.equals("Castilla")) {
+        misSoldadosEspeciales.add(new EspadachinConquistador(equipo, random(5)));
+      }
+      if(reino.equals("Moros")) {
+        misSoldadosEspeciales.add(new CaballeroMoro(equipo))
+      }
+    }
     int[] soldados = new int[numSoldados];
     for(int j = 0; j < soldados.length; j += 1) {
       soldados[j] = random(4);
