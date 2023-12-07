@@ -41,9 +41,9 @@ public class Ejercito {
   }
 
   public Ejercito(String equipo, String reino) {
+    this.reino = reino;
     addSoldados(equipo);
     team = equipo;
-    this.reino = reino;
   }
 
   public Ejercito(String equipo, String reino, int nums) {
@@ -56,6 +56,7 @@ public class Ejercito {
     int numSoldados = random(7) + 1;
     int numSoldadosEspeciales = random(2);
     for(int i = 0; i < numSoldadosEspeciales; i += 1) {
+      System.out.println(reino);
       if(reino.equals("Inglaterra")) {
         misSoldadosEspeciales.add(new EspadachinReal(equipo, random(5)));
       }
@@ -69,7 +70,7 @@ public class Ejercito {
         misSoldadosEspeciales.add(new EspadachinConquistador(equipo, random(5)));
       }
       if(reino.equals("Moros")) {
-        misSoldadosEspeciales.add(new CaballeroMoro(equipo))
+        misSoldadosEspeciales.add(new CaballeroMoro(equipo));
       }
     }
     int[] soldados = new int[numSoldados];

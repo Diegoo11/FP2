@@ -20,6 +20,7 @@ public class VideoJuego {
   
       String nombreReino1 = reinos[indice1];
       String nombreReino2 = reinos[indice2];
+      System.out.println(nombreReino1 + nombreReino2);
   
       Mapa table = new Mapa();
 
@@ -51,7 +52,7 @@ public class VideoJuego {
     String name = "Reino " + (i + 1);
     if(!(t.getTable()[x][y] == null)) addEjercito(t, r, equipo, i, reino);
     else {
-      Ejercito ejercito = new Ejercito(equipo);
+      Ejercito ejercito = new Ejercito(equipo, reino);
       ejercito.setColumna(x);
       ejercito.setFila(y);
       ejercito.setNombre(name);
@@ -143,7 +144,7 @@ public class VideoJuego {
         System.out.println("Arqueros: " + s.getMisArqueros().size());
         System.out.println("Caballeros: " + s.getMisCaballeros().size());
         System.out.println("Lanceros: " + s.getMisLanceros().size());
-        System.out.println(
+        if(s.getMisSoldadosEspeciales().size() > 0) System.out.println(
           s.getMisSoldadosEspeciales().get(0).getNombre()
           + ": "
           + s.getMisSoldadosEspeciales().size()
@@ -156,7 +157,7 @@ public class VideoJuego {
         System.out.println("Arqueros: " + sF.getMisArqueros().size());
         System.out.println("Caballeros: " + sF.getMisCaballeros().size());
         System.out.println("Lanceros: " + sF.getMisLanceros().size());
-        System.out.println(
+        if(sF.getMisSoldadosEspeciales().size() > 0)System.out.println(
           sF.getMisSoldadosEspeciales().get(0).getNombre()
           + ": "
           + sF.getMisSoldadosEspeciales().size()
@@ -169,7 +170,110 @@ public class VideoJuego {
   
   public static void atacarEjercito(Ejercito e1, Ejercito e2) {
     SoldadoComun[][] mapa = new SoldadoComun[10][10];
-    
+    for(Arquero s : e1.getMisArqueros()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+  
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
+    for(Caballero s : e1.getMisCaballeros()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+  
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
+    for(Espadachin s : e1.getMisEspadachines()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
+    for(Lancero s : e1.getMisLanceros()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
+    for(Arquero s : e2.getMisArqueros()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
+    for(Caballero s : e2.getMisCaballeros()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
+    for(Espadachin s : e2.getMisEspadachines()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
+    for(Lancero s : e2.getMisLanceros()) {
+      while(true) {
+        int x = random(10);
+        int y = random(10);
+        s.setColumna(x);
+        s.setFila(y);
+
+        if(mapa[x][y] == null) {
+          mapa[x][y] = s;
+          break;
+        }
+      }
+    }
     int turno = 1;
     while (true) {
       System.out.println("     A       B       C       D       E       F       G       H       I       J      ");
@@ -177,14 +281,10 @@ public class VideoJuego {
       for(int i = 0; i < mapa.length; i += 1) {
         System.out.print((i + 1) + " |");
         for(int j = 0; j < mapa.length; j += 1) {
-          SoldadoComun soldado = mapa[i][j];
+          Soldado soldado = mapa[i][j];
           if(soldado == null) System.out.print("       |");
           else {
-            System.out.print(
-              " " + soldado.getTeam()
-              + "/" + soldado.getNombre().charAt(0)
-              + "/" + soldado.getNivelVida() +  " |"
-            );
+            System.out.print(" " + soldado.getTeam() + "/" + soldado.getNombre().charAt(0) + "/" + soldado.getNivelVida() +  " |");
           }
         }
         System.out.println();
@@ -192,6 +292,7 @@ public class VideoJuego {
       }
       moverSoldados(mapa, e1, e2, turno);
       turno = turno == 1 ? 2 : 1;
+
     }
   }
   
