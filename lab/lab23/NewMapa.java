@@ -47,7 +47,7 @@ public class NewMapa {
     String name = "Reino " + (i + 1);
     if(!(table[x][y] == null)) addEjercito(r, equipo, i, reino);
     else {
-      Ejercito ejercito = new Ejercito(equipo);
+      Ejercito ejercito = new Ejercito(equipo, reino);
       ejercito.setColumna(x);
       ejercito.setFila(y);
       ejercito.setNombre(name);

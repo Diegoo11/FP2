@@ -8,12 +8,12 @@ class Archivo07 {
     Scanner sc = new Scanner(System.in);
     System.out.println("Ingresa el archivo a leer");
     String file = sc.nextLine();
-    try{
-        Scanner fileIn = new Scanner(new FileReader("./"+file));
-        String keyWord = fileIn.nextLine();
-        System.out.println("La 1ra linea: ");
-        System.out.println(keyWord);
-        fileIn.close();
+    try {
+      Scanner fileIn = new Scanner(new FileReader("./"+file));
+      String keyWord = fileIn.nextLine();
+      System.out.println("La 1ra linea: ");
+      System.out.println(keyWord);
+      fileIn.close();
     }
     catch(FileNotFoundException e){
       System.out.println(e.getMessage());
